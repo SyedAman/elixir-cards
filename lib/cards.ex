@@ -1,10 +1,26 @@
 defmodule Cards do
   def create_deck() do
     suits = ["diamonds", "clubs", "spades", "hearts"]
-    ranks = ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"]
 
-    for suit <- suits, rank <- ranks do
-      { rank, suit }
+    ranks = [
+      "ace",
+      "two",
+      "three",
+      "four",
+      "five",
+      "six",
+      "seven",
+      "eight",
+      "nine",
+      "ten",
+      "jack",
+      "queen",
+      "king"
+    ]
+
+    for suit <- suits,
+        rank <- ranks do
+      {rank, suit}
     end
   end
 
@@ -26,15 +42,19 @@ defmodule Cards do
   end
 
   def load_deck_from_file(file_name_to_load) do
-    { status, binary } = File.read(file_name_to_load)
-    :erlang.binary_to_term(binary)
+    {status, binary} = File.read(file_name_to_load)
+
+    case status do
+      :ok -> :erlang.binary_to_term(binary)
+      :error -> "That file does not exist!"
+    end
   end
 
   def main do
     shuffledDeck = shuffle(create_deck())
 
-    { first_hand, rest_of_deck } = deal(shuffledDeck, 5)
-    { second_hand, rest_of_deck } = deal(rest_of_deck, 5)
+    {first_hand, rest_of_deck} = deal(shuffledDeck, 5)
+    {second_hand, rest_of_deck} = deal(rest_of_deck, 5)
 
     save(first_hand, 'first-hand')
     load_deck_from_file('first-hand')
