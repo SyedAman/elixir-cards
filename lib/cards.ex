@@ -32,8 +32,8 @@ defmodule Cards do
 
   def main do
     newDeck = create_deck()
-    # shuffledDeck = shuffle_deck(newDeck)
+    shuffledDeck = shuffle_deck(newDeck)
 
-    # checkIfDeckHasCard?(shuffledDeck, "ace")
+    checkIfDeckHasCard?(shuffledDeck, {"five", "diamonds"})
   end
 end
