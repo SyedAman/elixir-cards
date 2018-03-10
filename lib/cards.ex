@@ -40,6 +40,16 @@ defmodule Cards do
     Enum.split(deck, hand_size)
   end
 
+  @doc """
+    Gets an amount of cards as specified by `hand_size` from a shuffled deck
+    of cards.
+
+    ## Examples
+    
+      iex > create_hand(2)
+      [{"ace", "spades"}, {"king", "diamonds"}]
+
+  """
   def create_hand(hand_size) do
     {hand, _rest_of_deck} =
       create_deck
