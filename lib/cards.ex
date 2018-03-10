@@ -25,13 +25,18 @@ defmodule Cards do
     File.write(saved_file_name, binary)
   end
 
+  def load_deck_from_file(file_name_to_load) do
+    { status, binary } = File.read(file_name_to_load)
+    :erlang.binary_to_term(binary)
+  end
+
   def main do
     shuffledDeck = shuffle(create_deck())
 
     { first_hand, rest_of_deck } = deal(shuffledDeck, 5)
-    save(first_hand, 'first-hand')
-
     { second_hand, rest_of_deck } = deal(rest_of_deck, 5)
-    save(second_hand, 'second-hand')
+
+    save(first_hand, 'first-hand')
+    load_deck_from_file('first-hand')
   end
 end
