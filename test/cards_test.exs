@@ -13,6 +13,7 @@ defmodule CardsTest do
     original_deck = Cards.create_deck()
     shuffled_deck = Cards.shuffle(original_deck)
 
+    assert length(shuffled_deck) == 52
     refute shuffled_deck == original_deck
   end
 end
