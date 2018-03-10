@@ -36,6 +36,12 @@ defmodule Cards do
     Enum.split(deck, hand_size)
   end
 
+  def create_hand(hand_size) do
+    shuffled_deck = shuffle(create_deck())
+    {hand, rest_of_deck} = deal(shuffled_deck, 5)
+    hand
+  end
+
   def save(deck_to_save, saved_file_name) do
     binary = :erlang.term_to_binary(deck_to_save)
     File.write(saved_file_name, binary)
@@ -49,12 +55,9 @@ defmodule Cards do
   end
 
   def main do
-    shuffledDeck = shuffle(create_deck())
+    new_hand = create_hand(5)
 
-    {first_hand, rest_of_deck} = deal(shuffledDeck, 5)
-    {second_hand, rest_of_deck} = deal(rest_of_deck, 5)
-
-    save(first_hand, 'first-hand')
-    load_deck_from_file('first-hand')
+    save(new_hand, 'new-hand')
+    load_deck_from_file('new-hand')
   end
 end
