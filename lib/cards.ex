@@ -44,8 +44,8 @@ defmodule Cards do
     Gets an amount of cards as specified by `hand_size` from a shuffled deck
     of cards.
 
-    ## Examples
-    
+  ## Examples
+
       iex > create_hand(2)
       [{"ace", "spades"}, {"king", "diamonds"}]
 
