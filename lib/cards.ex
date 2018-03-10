@@ -1,18 +1,4 @@
 defmodule Cards do
-  @moduledoc """
-  Documentation for Cards.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Cards.hello
-      :world
-
-  """
-
   def create_deck() do
     suits = ["diamonds", "clubs", "spades", "hearts"]
     ranks = ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"]
@@ -22,7 +8,7 @@ defmodule Cards do
     end
   end
 
-  def shuffle_deck(deck) do
+  def shuffle(deck) do
     Enum.shuffle(deck)
   end
 
@@ -30,10 +16,22 @@ defmodule Cards do
     Enum.member?(deck, card)
   end
 
-  def main do
-    newDeck = create_deck()
-    shuffledDeck = shuffle_deck(newDeck)
+  def deal(deck, hand_size) do
+    Enum.split(deck, hand_size)
+  end
 
-    checkIfDeckHasCard?(shuffledDeck, {"five", "diamonds"})
+  def save(deck_to_save, saved_file_name) do
+    binary = :erlang.term_to_binary(deck_to_save)
+    File.write(saved_file_name, binary)
+  end
+
+  def main do
+    shuffledDeck = shuffle(create_deck())
+
+    { first_hand, rest_of_deck } = deal(shuffledDeck, 5)
+    save(first_hand, 'first-hand')
+
+    { second_hand, rest_of_deck } = deal(rest_of_deck, 5)
+    save(second_hand, 'second-hand')
   end
 end
