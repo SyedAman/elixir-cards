@@ -57,10 +57,19 @@ defmodule Cards do
     end
   end
 
+  def display_deck(deck) do
+    for card <- deck do
+      {rank, suit} = card
+      "#{rank} of #{suit}"
+    end
+  end
+
   def main do
     new_hand = create_hand(5)
 
     save(new_hand, 'new-hand')
     load_deck_from_file('new-hand')
+
+    display_deck(new_hand)
   end
 end
