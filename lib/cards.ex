@@ -37,8 +37,11 @@ defmodule Cards do
   end
 
   def create_hand(hand_size) do
-    shuffled_deck = shuffle(create_deck())
-    {hand, rest_of_deck} = deal(shuffled_deck, 5)
+    {hand, _rest_of_deck} =
+      create_deck
+      |> shuffle
+      |> deal(hand_size)
+
     hand
   end
 
