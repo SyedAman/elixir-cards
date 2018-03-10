@@ -32,7 +32,17 @@ defmodule Cards do
     Enum.shuffle(deck)
   end
 
-  def checkIfDeckHasCard?(deck, card) do
+  @doc """
+    Checks to see if a given card is in the given deck.
+
+  ## Examples
+
+      iex> deck = Cards.create_deck()
+      iex> Cards.has_card?(deck, {"ace", "spades"})
+      true
+
+  """
+  def has_card?(deck, card) do
     Enum.member?(deck, card)
   end
 
@@ -43,12 +53,6 @@ defmodule Cards do
   @doc """
     Gets an amount of cards as specified by `hand_size` from a shuffled deck
     of cards.
-
-  ## Examples
-
-      iex > create_hand(2)
-      [{"ace", "spades"}, {"king", "diamonds"}]
-
   """
   def create_hand(hand_size) do
     {hand, _rest_of_deck} =
