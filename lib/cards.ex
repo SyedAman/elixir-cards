@@ -67,7 +67,7 @@ defmodule Cards do
   def load_deck_from_file(file_name_to_load) do
     case File.read(file_name_to_load) do
       {:ok, binary} -> :erlang.binary_to_term(binary)
-      {:error, error_message} -> "That file does not exist!"
+      {:error, _error_message} -> "That file does not exist!"
     end
   end
 
